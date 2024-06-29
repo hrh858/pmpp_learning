@@ -21,6 +21,7 @@ void vecAdd(float *h_inA, float *h_inB, float *h_outC, int n) {
     cudaMemcpy(d_inA, h_inA, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_inB, h_inB, size, cudaMemcpyHostToDevice);
 
+    // Arbitrary dimension of 256
     vecAddKernel<<<ceil(n/256.0), 256>>>(d_inA, d_inB, d_outC, n);
 
     cudaMemcpy(h_outC, d_outC, size, cudaMemcpyDeviceToHost);
@@ -46,4 +47,6 @@ int main() {
     for (int i = 0; i < N; i++) {
         printf("Value at position %d is %.2f\n", i, outC[i]);
     }
+
+    return 0;
 }
