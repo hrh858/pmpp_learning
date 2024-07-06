@@ -26,10 +26,10 @@ void matMul(const int *h_m, const int *h_n, int *h_o, const int size) {
   cudaMemcpy(d_n, h_n, mallocSize, cudaMemcpyHostToDevice);
 
   dim3 dimBlock(16, 16, 1);
-  dim3 dimGrid(ceil(size/16.0), ceil(size/16.0), 1);
+  dim3 dimGrid(ceil(size / 16.0), ceil(size / 16.0), 1);
   matMulKernel<<<dimGrid, dimBlock>>>(d_m, d_n, d_o, size);
 
-  cudaMemcpy(h_o, d_o, mallocSize, cudaDeviceToHost);
+  cudaMemcpy(h_o, d_o, mallocSize, cudaMemcpyDeviceToHost);
 
   cudaFree(d_m);
   cudaFree(d_n);
@@ -47,10 +47,10 @@ int main() {
 
   printf("Result matrix:\n");
   for (int i = 0; i < size; ++i) {
-      for (int j = 0; j < size; ++j) {
-          printf("%d ", o[i * size + j]);
-      }
-      printf("\n");
+    for (int j = 0; j < size; ++j) {
+      printf("%d ", o[i * size + j]);
+    }
+    printf("\n");
   }
 
   return 0;
