@@ -44,9 +44,9 @@ __global__ void convolutionKernel(unsigned char *in, unsigned char *out, int w,
           acc += d_CONV_FILTER[fRow][fCol] *
                  sharedMem[threadIdx.y - CONV_FILTER_R + fRow]
                           [threadIdx.x - CONV_FILTER_R + fCol];
-        // acc += d_CONV_FILTER[fRow][fCol] *
-        //          sharedMem[threadIdx.y + fRow]
-        //                   [threadIdx.x + fCol];
+          // acc += d_CONV_FILTER[fRow][fCol] *
+          //          sharedMem[threadIdx.y + fRow]
+          //                   [threadIdx.x + fCol];
 
         } else {
           if (row - CONV_FILTER_R + fRow >= 0 &&

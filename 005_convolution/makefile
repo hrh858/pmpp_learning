@@ -10,5 +10,8 @@ tiled1:
 run_tiled1:
 	./convolution_tiled1 ../001_colorToGrayscale/grayscale_lenna.png
 
+tiled2:
+	nvcc -o convolution_tiled_cached -I. convolution_tiled_cached
+
 clean:
 	rm -f convolution_simple 
